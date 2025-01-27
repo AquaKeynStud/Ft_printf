@@ -6,7 +6,7 @@
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:27:07 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/24 14:54:52 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:29:05 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putnbr_fd(int n, int fd, size_t *total_len, int (*f)[8])
 	long	nb;
 	char	digit;
 
-	if (f && !(*f)[6] && n == 0)
+	if (f && !(*f)[6] && (*f)[2] && n == 0)
 	{
 		*total_len += write(fd, " ", 1);
 		return ;
@@ -46,7 +46,7 @@ void	ft_putunbr_fd(unsigned int n, int fd, size_t *total_len, int (*f)[8])
 	unsigned long	nb;
 	char			digit;
 
-	if (f && !(*f)[6] && n == 0)
+	if (f && !(*f)[6] && (*f)[2] && n == 0)
 	{
 		*total_len += write(fd, " ", 1);
 		return ;

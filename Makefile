@@ -10,6 +10,8 @@ CFLAGS := -Wall -Wextra -Werror
 
 RM := rm -rf
 
+SHOW_MSG_CLEAN = true
+
 # ╰━━━━━━━━━━━━━━━━════════════════╛出 ❖ 力╘════════════════━━━━━━━━━━━━━━━━╯ #
 
 # ╭━━━━━━━━━━━━══════════╕出 ❖ FILE TREE ❖ 力╒═══════════━━━━━━━━━━━━╮ #
@@ -22,21 +24,20 @@ D_OBJ = .obj/
 $(shell mkdir -p $(D_OBJ))
 
 # file lists
-LST_SRC =	utils2.c \
-			utils.c \
-			mandatory_printers.c \
-			mandatory_handlers.c \
+LST_SRC =	mandatory_main.c		\
+			mandatory_handlers.c	\
+			mandatory_printers.c	\
+			utils.c					\
 
-LST_MAN = 	mandatory_parser.c \
+LST_MAN = 	mandatory_parser.c		\
 
-LST_BON =	bonus_main.c \
-			bonus_parser.c \
-			bonus_printers.c \
-			bonus_printers_2.c \
-			bonus_setter.c \
-			bonus_utils.c \
+LST_BON =	bonus_parser.c			\
+			bonus_setter.c			\
+			bonus_printers.c		\
+			bonus_printers_2.c		\
+			bonus_utils.c			\
 
-LST_INC = 	ft_printf.h \
+LST_INC = 	ft_printf.h				\
 
 # files paths
 SRC  =	$(addprefix $(D_SRC), $(LST_SRC))
@@ -64,34 +65,36 @@ $(D_OBJ)%.o: $(D_BON)%.c $(D_INC)ft_printf.h
 bonus : $(D_OBJ).bonus
 
 mandatory : clear $(MOBJ) $(LIBFT)
-	@$(MAKE) $(NAME)
+	@$(MAKE) -s $(NAME)
 	@$(RM) $(D_OBJ)main.o
 	@ar rcs $(NAME) $(OBJ) $(MOBJ)
-	@echo "\e[0;32mArchive créée avec succès ! 🧬\e[0m"
+	@echo "\e[0;32mArchive de ft_printf créée avec succès ! 🧬\e[0m"
 
 $(D_OBJ).bonus : clear $(BOBJ) $(LIBFT)
-	@$(MAKE) $(NAME)
+	@$(MAKE) -s $(NAME)
 	@$(RM) $(D_OBJ)mandatory_parser.o
 	@ar rcs $(NAME) $(OBJ) $(BOBJ)
 	@touch $(D_OBJ).bonus
-	@echo "\e[0;32mArchive créée avec succès ! 🧬\e[0m"
+	@echo "\e[0;32mArchive bonus de ft_printf créée avec succès ! 🧬\e[0m"
 
 clear:
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
-clean :
-	$(RM) $(D_OBJ)
-	@echo "\e[0;36mTout est nickel 🧹\e[0m"
+clean:
+ifeq ($(SHOW_MSG_CLEAN), true)
+	@echo "\e[0;36mJ'ai enlevé tous les objets relatifs à ft_printf 🧹\e[0m"
+endif
+	@$(RM) $(D_OBJ)
 
-fclean :
-	$(MAKE) clean
-	$(RM) $(NAME) mandatory_tester bonus_tester .bonus
-	@echo "\e[0;34mJ'ai tout nettoyé :D 🧼\e[0m"
+fclean:
+	@$(MAKE) -s SHOW_MSG_CLEAN=false clean
+	@$(RM) $(NAME) mandatory_tester bonus_tester .bonus
+	@echo "\e[0;34mArchive de ft_printf nettoyée 🧼\e[0m"
 
 re :
 	$(MAKE) fclean
 	$(MAKE) all
-	@echo "\e[0;32mArchive recréée avec succès ! 🫡\e[0m"
+	@echo "\e[0;32mArchive de ft_printf recréée avec succès ! 🫡\e[0m"
 
 norminette :
 	norminette -R CheckForbiddenSourceHeader $(D_SRC) $(D_BON) $(D_INC)

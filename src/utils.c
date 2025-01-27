@@ -14,24 +14,23 @@
 #include <limits.h>
 #include <stdint.h>
 
-int	mandatory_parser(char c, va_list *args, size_t *total_len)
+int	authorized_c(char c)
 {
-	if (c == 'd' || c == 'i' || c == 'u')
-		handle_nbr(args, total_len, (c != 'u'));
-	if (c == 'c')
-		handle_char(args, total_len);
-	if (c == 's')
-		handle_string(args, total_len);
-	if (c == '%')
-		*total_len += ft_putchar_fd('%', 1);
-	if (c == 'p')
-		handle_address(args, total_len);
-	if (c == 'x' || c == 'X')
-		handle_hexa(args, total_len, (c == 'x'));
-	return (1);
+	char	*conv;
+	int		i;
+
+	i = 0;
+	conv = "-0.+ #123456789";
+	while (conv[i])
+	{
+		if (conv[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
-char	check_conversion(char c)
+char	check_conv(char c)
 {
 	char	*types;
 
@@ -43,14 +42,6 @@ char	check_conversion(char c)
 		types++;
 	}
 	return (0);
-}
-
-void	format_update(char **s, size_t	*i, size_t *len, va_list *args)
-{
-	write(1, *s, *i);
-	*s += *i + parse_args(*s + *i + 1, args, len) + 1;
-	*len += *i;
-	*i = 0;
 }
 
 int	ft_atoi(const char *nptr)
@@ -79,17 +70,17 @@ int	ft_atoi(const char *nptr)
 	return (((int)res) * sign);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+size_t	ft_strlen(const char *str)
 {
-	void	*tab;
+	size_t	i;
 
-	if (size == 0 || nmemb == 0)
-		return (malloc(0));
-	if (nmemb > SIZE_MAX / size || size > SIZE_MAX / nmemb)
-		return (NULL);
-	tab = malloc(size * nmemb);
-	if (!tab)
-		return (NULL);
-	ft_memset(tab, 0, size * nmemb);
-	return (tab);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int	ft_isdigit(int c)
+{
+	return (c > '0' && c <= '9');
 }

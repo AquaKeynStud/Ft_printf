@@ -15,14 +15,13 @@
 
 # include <stdarg.h>
 # include <unistd.h>
-# include <stdlib.h>
 
 int		ft_printf(const char *format, ...);
 int		parse_args(char *s, va_list *args, size_t *total_len);
 
 int		mandatory_parser(char c, va_list *args, size_t *total_len);
 void	format_update(char **s, size_t	*i, size_t *len, va_list *args);
-char	check_conversion(char c);
+char	check_conv(char c);
 
 void	handle_string(va_list *args, size_t *total_len);
 void	handle_char(va_list *args, size_t *total_len);
@@ -42,9 +41,6 @@ int		addr_len(void *addr);
 int		hexa_len(unsigned int nb);
 
 size_t	ft_strlen(const char *str);
-void	*ft_calloc(size_t nmemb, size_t size);
-void	*ft_memmove(void *dest, const void *src, size_t n);
-void	*ft_memset(void *s, int c, size_t n);
 int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
 int		ft_isdigit(int c);

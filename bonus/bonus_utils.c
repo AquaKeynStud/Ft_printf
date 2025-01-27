@@ -6,7 +6,7 @@
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:33:12 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/15 14:33:24 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/27 19:27:56 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	hexa_len(unsigned int nb)
 	int				count;
 
 	count = 0;
-	while (nb > 16)
+	while (nb >= 16)
 	{
 		count += 1;
 		nb /= 16;
@@ -73,18 +73,28 @@ int	hexa_len(unsigned int nb)
 	return (count + 1);
 }
 
-int	authorized_c(char c)
+void	write_sign(int *n, size_t *total_len, int (*f)[8])
 {
-	char	*conv;
-	int		i;
-
-	i = 0;
-	conv = "-0.+ #123456789";
-	while (conv[i])
+	if ((*n) >= 0 && (*f)[4] && !(*f)[3])
 	{
-		if (conv[i] == c)
-			return (i);
-		i++;
+		*total_len += write(1, " ", 1);
+		(*f)[7] -= 1;
 	}
-	return (-1);
+	if ((*f)[3] && (*n) >= 0)
+	{
+		*total_len += write(1, "+", 1);
+		if ((*f)[7] <= 0)
+			(*f)[6] -= 1;
+		else
+			(*f)[7] -= 1;
+	}
+	else if ((*n) < 0)
+	{
+		*total_len += write(1, "-", 1);
+		(*n) *= -1;
+		if ((*f)[7])
+			(*f)[7] -= 1;
+		else if (!(*f)[7] && (*f)[1])
+			(*f)[6] -= 1;
+	}
 }

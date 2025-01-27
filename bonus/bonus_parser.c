@@ -6,7 +6,7 @@
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:32:27 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/24 15:11:05 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:42:39 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	error_tab(char *s)
 
 	value = 0;
 	has_space = 0;
-	while (*s && !check_conversion(*s) && authorized_c(*s) >= 0)
+	while (*s && !check_conv(*s) && authorized_c(*s) >= 0)
 	{
 		if (authorized_c(*s) >= 6 && ft_isdigit(*s))
 		{
@@ -54,7 +54,7 @@ static void	init_tab(char *s, int (*f)[8], int tab_len)
 {
 	while (tab_len >= 0)
 		(*f)[tab_len--] = 0;
-	while (*s && !check_conversion(*s) && authorized_c(*s) >= 0)
+	while (*s && !check_conv(*s) && authorized_c(*s) >= 0)
 	{
 		if (authorized_c(*s) >= 6 && ft_isdigit(*s))
 		{
@@ -100,7 +100,7 @@ int	parse_args(char *s, va_list *args, size_t *total_len)
 	int		f[8];
 
 	len = 0;
-	if (error_tab(s) || authorized_c(s[len]) == -1)
+	if (error_tab(s) || (authorized_c(s[len]) == -1 && !check_conv(s[len])))
 	{
 		*total_len += write(1, "%", 1);
 		while (authorized_c(s[len]) >= 0)
@@ -114,10 +114,10 @@ int	parse_args(char *s, va_list *args, size_t *total_len)
 		return (len);
 	}
 	init_tab(s, &f, 7);
-	while (s[len] && !check_conversion(s[len]) && authorized_c(s[len]) >= 0)
+	while (s[len] && !check_conv(s[len]) && authorized_c(s[len]) >= 0)
 		len++;
 	if (len == 0)
-		mandatory_parser(s[0], args, total_len);
+		return (mandatory_parser(s[0], args, total_len));
 	bonus_parser(s[len], args, total_len, &f);
 	return (len + 1);
 }
