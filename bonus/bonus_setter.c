@@ -6,7 +6,7 @@
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:32:58 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/27 16:46:47 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/31 13:41:20 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,27 @@ void	create_nbr(char c, va_list *args, size_t *total_len, int (*f)[8])
 		print_char_bonus(arg, total_len, f);
 	else if (c == 'u')
 		print_uint_bonus(uarg, total_len, f);
-	else if (c == 'x')
-		print_x_bonus(uarg, total_len, f, "0123456789abcdef");
+	return ;
+}
+
+void	create_x(char c, va_list *args, size_t *total_len, int (*f)[8])
+{
+	unsigned int	uarg;
+	char			*base[2];
+
+	uarg = (unsigned int)va_arg(*args, unsigned int);
+	if (c == 'x')
+	{
+		base[1] = "0x";
+		base[0] = "0123456789abcdef";
+		print_x_bonus(uarg, total_len, f, base);
+	}
 	else if (c == 'X')
-		print_x_bonus(uarg, total_len, f, "0123456789ABCDEF");
+	{
+		base[1] = "0X";
+		base[0] = "0123456789ABCDEF";
+		print_x_bonus(uarg, total_len, f, base);
+	}
 	return ;
 }
 

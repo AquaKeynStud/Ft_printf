@@ -6,7 +6,7 @@
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:32:27 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/27 18:42:39 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/31 13:40:52 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,18 @@ static void	init_tab(char *s, int (*f)[8], int tab_len)
 
 int	bonus_parser(char c, va_list *args, size_t *total_len, int (*f)[8])
 {
-	if (c == 'i' || c == 'd' || c == 'c' || c == 'x' || c == 'X')
+	if (c == 'i' || c == 'd' || c == 'c')
 		create_nbr(c, args, total_len, f);
-	if (c == 'p')
+	else if (c == 'p')
 		create_addr(args, total_len, f);
-	if (c == 'u')
+	else if (c == 'u')
 		create_nbr(c, args, total_len, f);
-	if (c == '%')
+	else if (c == '%')
 		*total_len += write(1, "%", 1);
-	if (c == 's')
+	else if (c == 's')
 		create_string(args, total_len, f);
+	else if (c == 'x' || c == 'X')
+		create_x(c, args, total_len, f);
 	return (0);
 }
 

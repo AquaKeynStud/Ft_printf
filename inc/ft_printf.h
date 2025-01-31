@@ -38,7 +38,7 @@ int		c_d(int nb);
 int		fill(char c, int len, int (*f)[8], int both);
 int		authorized_c(char c);
 int		addr_len(void *addr);
-int		hexa_len(unsigned int nb);
+int		x_len(unsigned int nb);
 
 size_t	ft_strlen(const char *str);
 int		ft_putchar_fd(char c, int fd);
@@ -47,6 +47,7 @@ int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
 
 void	create_nbr(char c, va_list *args, size_t *total_len, int (*f)[8]);
+void	create_x(char c, va_list *args, size_t *total_len, int (*f)[8]);
 void	create_addr(va_list *args, size_t *total_len, int (*f)[8]);
 void	create_string(va_list *args, size_t *total_len, int (*f)[8]);
 
@@ -54,7 +55,7 @@ void	print_nb_bonus(int nbr, size_t *total_len, int (*f)[8]);
 void	print_char_bonus(int n, size_t *total_len, int (*f)[8]);
 void	print_addr_bonus(void *arg, size_t *total_len, int (*f)[8]);
 void	print_uint_bonus(unsigned int arg, size_t *total_len, int (*f)[8]);
-void	print_x_bonus(unsigned int n, size_t *total_len, int (*f)[8], char *b);
+void	print_x_bonus(unsigned int n, size_t *total_len, int (*f)[8], char **b);
 void	print_str_bonus(char *str, size_t *total_len, int (*f)[8]);
 void	ft_print_memory_bonus(void *addr, size_t *total_len, int (*f)[8]);
 void	write_sign(int *n, size_t *total_len, int (*f)[8]);

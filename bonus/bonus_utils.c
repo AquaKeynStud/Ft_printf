@@ -6,7 +6,7 @@
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:33:12 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/27 19:27:56 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/31 13:28:41 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	addr_len(void *addr)
 	return (count + 1);
 }
 
-int	hexa_len(unsigned int nb)
+int	x_len(unsigned int nb)
 {
 	int				count;
 
