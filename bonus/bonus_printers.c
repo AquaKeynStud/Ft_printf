@@ -6,7 +6,7 @@
 /*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:32:37 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/27 19:27:48 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/31 13:13:08 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	print_nb_bonus(int n, size_t *total_len, int (*f)[8])
 	write_sign(&n, total_len, f);
 	if ((*f)[6])
 		*total_len += fill('0', (*f)[6] - c_d(n), f, 1);
-	if (!(*f)[5] && !(*f)[6] && !(*f)[7] && !(*f)[1] && !(*f)[2] && !(*f)[4])
+	if (!(*f)[1] && !(*f)[2] && !(*f)[3] && !(*f)[4]
+		&& !(*f)[5] && !(*f)[6] && !(*f)[7] && !(*f)[0])
 		return ;
 	ft_putnbr_fd(n, 1, total_len, f);
 }
@@ -112,7 +113,8 @@ void	print_uint_bonus(unsigned int arg, size_t *total_len, int (*f)[8])
 		*total_len += fill(' ', (*f)[7] - c_u(arg) - fs, f, 0);
 	if ((*f)[6])
 		*total_len += fill('0', (*f)[6] - c_u(arg), f, 1);
-	if (!(*f)[5] && !(*f)[6] && !(*f)[7] && !(*f)[1] && !(*f)[2] && !(*f)[4])
+	if (!(*f)[1] && !(*f)[2] && !(*f)[3] && !(*f)[4]
+		&& !(*f)[5] && !(*f)[6] && !(*f)[7] && !(*f)[0])
 		return ;
 	ft_putunbr_fd(arg, 1, total_len, f);
 }

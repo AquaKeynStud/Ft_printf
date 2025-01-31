@@ -21,7 +21,6 @@ D_SRC = src/
 D_BON = bonus/
 D_INC = inc/
 D_OBJ = .obj/
-$(shell mkdir -p $(D_OBJ))
 
 # file lists
 LST_SRC =	mandatory_main.c		\
