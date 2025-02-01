@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_printers_2.c                                 :+:      :+:    :+:   */
+/*   bonus_printers_spxX.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: keyn <keyn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:32:32 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/31 13:35:40 by arocca           ###   ########.fr       */
+/*   Updated: 2025/02/01 19:42:55 by keyn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	print_x_left(unsigned int n, size_t *total_len, int (*f)[8], char **b)
+void	print_x_left(unsigned int n, size_t *total_len, int (*f)[8], char **b)
 {
 	if (!(*f)[5] && !(*f)[6] && (*f)[2] && n == 0)
 		*total_len += write(1, " ", 1);

@@ -918,6 +918,9 @@ int main(void)
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[%]"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested); fflush(stdout);
 	custom_assert(original == tested, "Erreur sur le test 10 erreur", 168);
 
+	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("%zsqsf"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original); fflush(stdout);
+	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("%zsqsf"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested); fflush(stdout);
+	custom_assert(original == tested, "Erreur sur le test 10 erreur", 169);
 
 	printf("\e[37m╰━━━━═══╕出 ❖ ————————————— ❖ 力╒═══━━━━╯\e[0m\n\n\n");
 

@@ -6,7 +6,7 @@
 /*   By: keyn <keyn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:32:27 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/31 19:09:58 by keyn             ###   ########.fr       */
+/*   Updated: 2025/02/01 19:57:35 by keyn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ int	parse_args(char *s, va_list *args, size_t *total_len)
 	int		f[8];
 
 	len = 0;
-	if (error_tab(s) || (authorized_c(s[len]) == -1 && !check_conv(s[len])))
+	if (error_tab(s) || (authorized_c(s[0]) == -1 && !check_conv(s[0])
+			&& !check_conv(s[1])))
 	{
 		*total_len += write(1, "%", 1);
 		len += error_parser(s, len, total_len);
@@ -111,11 +112,13 @@ int	parse_args(char *s, va_list *args, size_t *total_len)
 	init_tab(s, &f, 7);
 	while (s[len] && !check_conv(s[len]) && authorized_c(s[len]) >= 0)
 		len++;
-	if (!check_conv(s[len]))
+	if (!check_conv(s[len]) && !check_conv(s[len + 1]))
 	{
 		*total_len += write(1, "%", 1);
 		return (*total_len += write(1, s, len));
 	}
+	else if (!check_conv(s[len]) && check_conv(s[len + 1]))
+		return (mandatory_parser(s[len + 1], args, total_len, 0) + 1);
 	if (len == 0)
 		return (mandatory_parser(s[0], args, total_len, 0));
 	bonus_parser(s[len], args, total_len, &f);

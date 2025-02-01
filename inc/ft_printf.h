@@ -56,6 +56,7 @@ void	print_char_bonus(int n, size_t *total_len, int (*f)[8]);
 void	print_addr_bonus(void *arg, size_t *total_len, int (*f)[8]);
 void	print_uint_bonus(unsigned int arg, size_t *total_len, int (*f)[8]);
 void	print_x_bonus(unsigned int n, size_t *total_len, int (*f)[8], char **b);
+void	print_x_left(unsigned int n, size_t *total_len, int (*f)[8], char **b);
 void	print_str_bonus(char *str, size_t *total_len, int (*f)[8]);
 void	ft_print_memory_bonus(void *addr, size_t *total_len, int (*f)[8]);
 void	write_sign(int *n, size_t *total_len, int (*f)[8]);

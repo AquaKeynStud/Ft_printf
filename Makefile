@@ -32,7 +32,7 @@ LST_MAN = 	mandatory_parser.c		\
 
 LST_BON =	bonus_parser.c			\
 			bonus_setter.c			\
-			bonus_printers_duic.c	\
+			bonus_printers_diuc.c	\
 			bonus_printers_spxX.c	\
 			bonus_utils.c			\
 
@@ -63,13 +63,13 @@ $(D_OBJ)%.o: $(D_BON)%.c $(D_INC)ft_printf.h
 
 bonus : $(D_OBJ).bonus
 
-mandatory : clear $(MOBJ) $(LIBFT)
+mandatory : clear $(MOBJ) $(OBJ)
 	@$(MAKE) -s $(NAME)
 	@$(RM) $(D_OBJ)main.o
 	@ar rcs $(NAME) $(OBJ) $(MOBJ)
 	@echo "\e[0;32mArchive de ft_printf créée avec succès ! 🧬\e[0m"
 
-$(D_OBJ).bonus : clear $(BOBJ) $(LIBFT)
+$(D_OBJ).bonus : clear $(BOBJ) $(OBJ)
 	@$(MAKE) -s $(NAME)
 	@$(RM) $(D_OBJ)mandatory_parser.o
 	@ar rcs $(NAME) $(OBJ) $(BOBJ)
