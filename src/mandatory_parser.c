@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandatory_parser.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: keyn <keyn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:26:50 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/27 16:55:49 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/31 17:40:23 by keyn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,18 @@
 int	parse_args(char *s, va_list *args, size_t *total_len)
 {
 	if (check_conv(s[0]))
-		return (mandatory_parser(s[0], args, total_len));
-	else if (!check_conv(s[0]))
-		return (*total_len += ft_putstr_fd("%", 1));
+		return (mandatory_parser(s[0], args, total_len, 0));
+	if (check_conv(s[1]))
+	{
+		if (mandatory_parser(s[1], args, total_len, 1))
+			return (mandatory_parser(s[1], args, total_len, 1) + 2);
+		else
+		{
+			*total_len = -1;
+			return (-1);
+		}
+	}
+	else
+		return (*total_len += write(1, "%", 1));
 	return (0);
 }

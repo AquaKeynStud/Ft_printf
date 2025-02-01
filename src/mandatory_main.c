@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandatory_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: keyn <keyn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:01:41 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/27 16:56:38 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/31 17:46:14 by keyn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,46 +18,47 @@ int	ft_putstr_fd(char *s, int fd)
 	return (ft_strlen(s));
 }
 
-int	mandatory_parser(char c, va_list *args, size_t *total_len)
+int	mandatory_parser(char c, va_list *args, size_t *total_len, int err)
 {
 	if (c == 'd' || c == 'i' || c == 'u')
-		handle_nbr(args, total_len, (c != 'u'));
+		return (handle_nbr(args, total_len, (c != 'u'), err) == 0);
 	if (c == 'c')
-		handle_char(args, total_len);
+		return (handle_char(args, total_len, err) == 0);
 	if (c == 's')
-		handle_string(args, total_len);
+		return (handle_string(args, total_len, err) == 0);
+	if (c == 'p')
+		return (handle_address(args, total_len, err) == 0);
+	if (c == 'x' || c == 'X')
+		return (handle_hexa(args, total_len, (c == 'x'), err) == 0);
 	if (c == '%')
 		*total_len += ft_putchar_fd('%', 1);
-	if (c == 'p')
-		handle_address(args, total_len);
-	if (c == 'x' || c == 'X')
-		handle_hexa(args, total_len, (c == 'x'));
 	return (1);
 }
 
 static int	error_detector(const char *format)
 {
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			while (authorized_c(*format) >= 0)
-				format++;
-			if (!check_conv(*format))
-				return (-1);
-		}
-		format++;
-	}
+	if (format[0] == '%' && !check_conv(format[1]) && !format[2])
+		return (1);
 	return (0);
 }
 
 void	format_update(char **s, size_t	*i, size_t *len, va_list *args)
 {
-	write(1, *s, *i);
-	*s += *i + parse_args(*s + *i + 1, args, len) + 1;
-	*len += *i;
-	*i = 0;
+	while ((*s)[(*i)])
+	{
+		if ((*s)[(*i)] == '%')
+		{
+			write(1, *s, *i);
+			*s += *i + parse_args(*s + *i + 1, args, len) + 1;
+			if (*len == -1)
+				return ;
+			*len += *i;
+			*i = 0;
+		}
+		else
+			(*i)++;
+	}
+	return ;
 }
 
 int	ft_printf(const char *format, ...)
@@ -73,14 +74,11 @@ int	ft_printf(const char *format, ...)
 		return (-1);
 	va_start(args, format);
 	s = (char *)format;
-	while (s[i])
-	{
-		if (s[i] == '%')
-			format_update(&s, &i, &len, &args);
-		else
-			i++;
-	}
+	format_update(&s, &i, &len, &args);
+	if (len == -1)
+		return (-1);
 	ft_putstr_fd(s, 1);
 	len += i;
+	va_end(args);
 	return (len);
 }

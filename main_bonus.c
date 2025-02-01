@@ -14,7 +14,7 @@ int	stl(const char *str)
 }
 
 void custom_assert(int expr, const char *msg, float n_test) {
-	float	total_test = 168;
+	float	total_test = 170;
 	int		size_pan = 2;
     if (!expr) {
 		printf("\e[31m╒");
@@ -901,6 +901,23 @@ int main(void)
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[%9-12c]", 'u'); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original); fflush(stdout);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[%9-12c]", 'u'); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested); fflush(stdout);
 	custom_assert(original == tested, "Erreur sur le test 8 erreur", 166);
+
+	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[%12z]"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original); fflush(stdout);
+	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[%12z]"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested); fflush(stdout);
+	custom_assert(original == tested, "Erreur sur le test 9 erreur", 167);
+
+	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[fesfsd%12ztesfd]"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original); fflush(stdout);
+	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[fesfsd%12ztesfd]"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested); fflush(stdout);
+	custom_assert(original == tested, "Erreur sur le test 10 erreur", 168);
+
+	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[%12ztesfd]"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original); fflush(stdout);
+	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[%12ztesfd]"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested); fflush(stdout);
+	custom_assert(original == tested, "Erreur sur le test 10 erreur", 168);
+
+	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[%]"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original); fflush(stdout);
+	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[%]"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested); fflush(stdout);
+	custom_assert(original == tested, "Erreur sur le test 10 erreur", 168);
+
 
 	printf("\e[37m╰━━━━═══╕出 ❖ ————————————— ❖ 力╒═══━━━━╯\e[0m\n\n\n");
 

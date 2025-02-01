@@ -19,15 +19,15 @@
 int		ft_printf(const char *format, ...);
 int		parse_args(char *s, va_list *args, size_t *total_len);
 
-int		mandatory_parser(char c, va_list *args, size_t *total_len);
+int		mandatory_parser(char c, va_list *args, size_t *total_len, int err);
 void	format_update(char **s, size_t	*i, size_t *len, va_list *args);
 char	check_conv(char c);
 
-void	handle_string(va_list *args, size_t *total_len);
-void	handle_char(va_list *args, size_t *total_len);
-void	handle_nbr(va_list *args, size_t *total_len, int isInt);
-void	handle_address(va_list *args, size_t *total_len);
-void	handle_hexa(va_list *args, size_t *total_len, int isLower);
+int		handle_string(va_list *args, size_t *total_len, int err);
+int		handle_char(va_list *args, size_t *total_len, int err);
+int		handle_nbr(va_list *args, size_t *total_len, int isInt, int err);
+int		handle_address(va_list *args, size_t *total_len, int err);
+int		handle_hexa(va_list *args, size_t *total_len, int isLower, int err);
 
 void	ft_putnbr_fd(int n, int fd, size_t *total_len, int (*f)[8]);
 void	ft_putunbr_fd(unsigned int n, int fd, size_t *total_len, int (*f)[8]);
@@ -59,5 +59,6 @@ void	print_x_bonus(unsigned int n, size_t *total_len, int (*f)[8], char **b);
 void	print_str_bonus(char *str, size_t *total_len, int (*f)[8]);
 void	ft_print_memory_bonus(void *addr, size_t *total_len, int (*f)[8]);
 void	write_sign(int *n, size_t *total_len, int (*f)[8]);
+int		error_parser(char *s, size_t len, size_t *total_len);
 
 #endif

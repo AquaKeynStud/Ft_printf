@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_setter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
+/*   By: keyn <keyn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:32:58 by arocca            #+#    #+#             */
-/*   Updated: 2025/01/31 13:41:20 by arocca           ###   ########.fr       */
+/*   Updated: 2025/01/31 19:10:07 by keyn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,17 @@ void	create_string(va_list *args, size_t *total_len, int (*f)[8])
 
 	arg = (char *)va_arg(*args, char *);
 	print_str_bonus(arg, total_len, f);
+}
+
+int	error_parser(char *s, size_t len, size_t *total_len)
+{
+	while (authorized_c(s[len]) >= 0)
+	{
+		if (!(len == 0 && s[len] == '0'))
+			*total_len += write(1, &s[len], 1);
+		if (s[len] == '.' && s[len + 1] == ' ')
+			*total_len += write(1, "0", 1);
+		len++;
+	}
+	return (len);
 }

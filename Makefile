@@ -55,11 +55,11 @@ $(NAME) : $(OBJ)
 
 $(D_OBJ)%.o: $(D_SRC)%.c $(D_INC)ft_printf.h
 	@mkdir -p $(D_OBJ)
-	$(CC) $(CFLAGS) -I$(D_INC) -c $< -o $@
+	$(CC)  -I$(D_INC) -c $< -o $@
 
 $(D_OBJ)%.o: $(D_BON)%.c $(D_INC)ft_printf.h
 	@mkdir -p $(D_OBJ)
-	$(CC) $(CFLAGS) -I$(D_INC) -c $< -o $@
+	$(CC)  -I$(D_INC) -c $< -o $@
 
 bonus : $(D_OBJ).bonus
 
