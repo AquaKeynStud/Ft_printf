@@ -283,10 +283,10 @@ int	main(void)
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf(NULL); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
 	custom_assert(original == tested, "Le test sans format n'est pas passé D:\n", 38);
 
-	printf("\e[31m╒═════════════════════════════════════════════════════════════════════════╕\n");
-	printf("│                          🪼 - ⚞ DISCLAIMER ⚟ - 🪼                         │");
-	printf("\n╘═════╕                                                             ╒═════╛\n");
-
+	printf("\e[31m");
+	printf("╒═════════════════════════════════════════════════════════════════════════╕\n");
+	printf("│                          🪼 - ⚞ DISCLAIMER ⚟ - 🪼                         │\n");
+	printf("╘═════╕                                                             ╒═════╛\n");
 	printf("      │         Les tests qui vont suivre sont plus poussés         │\n");
 	printf("      │          ils vous obligeraient surement à modifier          │\n");
 	printf("      │               une grande partie de votre code               │\n");

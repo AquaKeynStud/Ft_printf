@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	print_x_2(unsigned int n, size_t *total_len, int (*f)[8], char **b)
+static void	print_x_left(unsigned int n, size_t *total_len, int (*f)[8], char **b)
 {
 	if (!(*f)[5] && !(*f)[6] && (*f)[2] && n == 0)
 		*total_len += write(1, " ", 1);
@@ -40,7 +40,7 @@ void	print_x_bonus(unsigned int n, size_t *total_len, int (*f)[8], char **b)
 	int	fd;
 
 	if ((*f)[0])
-		return (print_x_2(n, total_len, f, b));
+		return (print_x_left(n, total_len, f, b));
 	fd = (((*f)[6] - x_len(n)) * ((*f)[6] > x_len(n)));
 	if ((*f)[7])
 		*total_len += fill(' ', (*f)[7] - x_len(n) - fd - ((*f)[5] * 2), f, 0);

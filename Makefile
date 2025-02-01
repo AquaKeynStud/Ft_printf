@@ -32,8 +32,8 @@ LST_MAN = 	mandatory_parser.c		\
 
 LST_BON =	bonus_parser.c			\
 			bonus_setter.c			\
-			bonus_printers.c		\
-			bonus_printers_2.c		\
+			bonus_printers_duic.c	\
+			bonus_printers_spxX.c	\
 			bonus_utils.c			\
 
 LST_INC = 	ft_printf.h				\

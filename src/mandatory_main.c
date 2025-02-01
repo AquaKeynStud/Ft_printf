@@ -35,13 +35,6 @@ int	mandatory_parser(char c, va_list *args, size_t *total_len, int err)
 	return (1);
 }
 
-static int	error_detector(const char *format)
-{
-	if (format[0] == '%' && !check_conv(format[1]) && !format[2])
-		return (1);
-	return (0);
-}
-
 void	format_update(char **s, size_t	*i, size_t *len, va_list *args)
 {
 	while ((*s)[(*i)])
@@ -70,10 +63,12 @@ int	ft_printf(const char *format, ...)
 
 	i = 0;
 	len = 0;
-	if (!format || error_detector(format))
+	if (!format)
 		return (-1);
 	va_start(args, format);
 	s = (char *)format;
+	if (s[0] == '%' && !check_conv(s[1]) && !s[2])
+		return (-1);
 	format_update(&s, &i, &len, &args);
 	if (len == -1)
 		return (-1);
