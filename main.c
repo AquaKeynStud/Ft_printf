@@ -297,7 +297,7 @@ int	main(void)
 	printf("      │                                                             │\n");
 	printf("      │      Ils ont cependant étés réalisés pour quelques uns      │\n");
 	printf("      │           pendant mes évaluations, soyez prudents           │\n");
-	printf("      ╘═════════════════════════════════════════════════════════════╛\n");
+	printf("      ╘═════════════════════════════════════════════════════════════╛\n\n\n");
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("%zqsf"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("%zqsf"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
