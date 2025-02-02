@@ -6,7 +6,7 @@
 /*   By: keyn <keyn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:01:41 by arocca            #+#    #+#             */
-/*   Updated: 2025/02/01 19:44:58 by keyn             ###   ########.fr       */
+/*   Updated: 2025/02/02 11:16:50 by keyn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ int	ft_printf(const char *format, ...)
 		return (-1);
 	va_start(args, format);
 	s = (char *)format;
-	if (s[0] == '%' && !check_conv(s[1]) && !s[2])
+	if (s[0] == '%' && (!s[1] || (s[1] != '\n' && !s[2])))
 		return (-1);
+	else if (s[0] == '%' && s[1] == '\n' || s[2] == '\n')
+		return (write(1, "%\n", 2));
 	format_update(&s, &i, &len, &args);
 	if (len == -1)
 		return (-1);

@@ -60,6 +60,10 @@ void	print_x_left(unsigned int n, size_t *total_len, int (*f)[8], char **b);
 void	print_str_bonus(char *str, size_t *total_len, int (*f)[8]);
 void	ft_print_memory_bonus(void *addr, size_t *total_len, int (*f)[8]);
 void	write_sign(int *n, size_t *total_len, int (*f)[8]);
+
+int		handle_tab_two_char_err(char *s, size_t len, size_t *total_len);
+int		handle_char_err(char *s, size_t len, size_t *total_len, va_list *args);
 int		error_parser(char *s, size_t len, size_t *total_len);
+int		error_tab(char *s);
 
 #endif

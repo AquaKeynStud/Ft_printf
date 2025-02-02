@@ -35,6 +35,7 @@ LST_BON =	bonus_parser.c			\
 			bonus_printers_diuc.c	\
 			bonus_printers_spxX.c	\
 			bonus_utils.c			\
+			bonus_error_handler.c	\
 
 LST_INC = 	ft_printf.h				\
 

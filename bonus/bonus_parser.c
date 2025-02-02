@@ -6,7 +6,7 @@
 /*   By: keyn <keyn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:32:27 by arocca            #+#    #+#             */
-/*   Updated: 2025/02/01 19:57:35 by keyn             ###   ########.fr       */
+/*   Updated: 2025/02/02 12:08:46 by keyn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	check_forbidden(int *last_is_dot, int *has_space, char s)
 		(*has_space) = 1;
 }
 
-static int	error_tab(char *s)
+int	error_tab(char *s)
 {
 	int	value;
 	int	last_is_dot;
@@ -99,16 +99,13 @@ int	bonus_parser(char c, va_list *args, size_t *total_len, int (*f)[8])
 int	parse_args(char *s, va_list *args, size_t *total_len)
 {
 	size_t	len;
+	int		handler;
 	int		f[8];
 
 	len = 0;
-	if (error_tab(s) || (authorized_c(s[0]) == -1 && !check_conv(s[0])
-			&& !check_conv(s[1])))
-	{
-		*total_len += write(1, "%", 1);
-		len += error_parser(s, len, total_len);
-		return (len);
-	}
+	handler = handle_tab_two_char_err(s, len, total_len);
+	if (handler != -1)
+		return (handler);
 	init_tab(s, &f, 7);
 	while (s[len] && !check_conv(s[len]) && authorized_c(s[len]) >= 0)
 		len++;
@@ -118,7 +115,7 @@ int	parse_args(char *s, va_list *args, size_t *total_len)
 		return (*total_len += write(1, s, len));
 	}
 	else if (!check_conv(s[len]) && check_conv(s[len + 1]))
-		return (mandatory_parser(s[len + 1], args, total_len, 0) + 1);
+		return (handle_char_err(s, len, total_len, args));
 	if (len == 0)
 		return (mandatory_parser(s[0], args, total_len, 0));
 	bonus_parser(s[len], args, total_len, &f);
