@@ -56,11 +56,11 @@ $(NAME) : $(OBJ)
 
 $(D_OBJ)%.o: $(D_SRC)%.c $(D_INC)ft_printf.h
 	@mkdir -p $(D_OBJ)
-	$(CC)  -I$(D_INC) -c $< -o $@
+	$(CC) $(FLAGS) -I$(D_INC) -c $< -o $@
 
 $(D_OBJ)%.o: $(D_BON)%.c $(D_INC)ft_printf.h
 	@mkdir -p $(D_OBJ)
-	$(CC)  -I$(D_INC) -c $< -o $@
+	$(CC) $(FLAGS) -I$(D_INC) -c $< -o $@
 
 bonus : $(D_OBJ).bonus
 
@@ -101,6 +101,10 @@ norminette :
 
 main : $(NAME)
 	@$(CC) -w -I$(D_INC) main.c $(NAME) -o mandatory_tester
+	@./mandatory_tester
+
+main2 : $(NAME)
+	@$(CC) -w -I$(D_INC) main_2.c $(NAME) -o mandatory_tester
 	@./mandatory_tester
 	
 bmain : $(NAME)
