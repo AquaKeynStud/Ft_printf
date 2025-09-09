@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include "ft_printf.h"
 
 int	stl(const char *str)
 {
@@ -14,45 +13,43 @@ int	stl(const char *str)
 }
 
 void custom_assert(int expr, const char *msg, float n_test) {
-	float	total_test = 170;
+	float	total_test = 46;
 	int		size_pan = 2;
-    if (!expr) {
+	if (!expr) {
 		printf("\e[31m╒");
-		for (int i = 0; i < (stl(msg) + 21); i++)
-		{
-			size_pan += 1;
+		for (int i = 0; i < (stl(msg) + 20); i++)
 			printf("═");
-		}
 		printf("╕\n");
 		printf("│");
-		for (int i = 0; i < (stl(msg) + 21); i++)
+		for (int i = 0; i < (stl(msg) + 20); i++)
 			printf(" ");
 		printf("│\n");
-        fprintf(stderr, "│  Assertion error:\e[0m %s\e[31m", msg);
+		fprintf(stderr, "│  Assertion error:\e[0m %s\e[31m", msg);
 		for (int i = 0; i < 2; i++)
 			printf(" ");
 		printf("│\n");
 		printf("│");
-		for (int i = 0; i < (stl(msg) + 21); i++)
+		for (int i = 0; i < (stl(msg) + 20); i++)
 			printf(" ");
 		printf("│\n");
 		printf("│");
-		for (int i = 0; i < (((stl(msg)) / 2) - 10 - ((stl(msg) + 21)%2 == 1)); i++)
+
+		for (int i = 0; i < ((((stl(msg)) + 20) / 2) - 21) + (stl(msg) % 2); i++)
 			printf(" ");
-		printf("\e[36m🫧  - Vous avez passé %05.2f%% des tests - 🫧\e[31m", (n_test / total_test) * 100);
-		for (int i = 0; i < ((stl(msg) - 18) / 2); i++)
+		printf("\e[36m🫧 - Vous avez passé %05.2f%% des tests - 🫧\e[31m", (n_test / total_test) * 100);
+		for (int i = 0; i < ((((stl(msg)) + 20) / 2) - 21); i++)
 			printf(" ");
 		printf("│\n");
 		printf("│");
-		for (int i = 0; i < (stl(msg) + 21); i++)
+		for (int i = 0; i < (stl(msg) + 20); i++)
 			printf(" ");
 		printf("│\n");
 		printf("╘");
-		for (int i = 0; i < (stl(msg) + 21); i++)
+		for (int i = 0; i < (stl(msg) + 20); i++)
 			printf("═");
 		printf("╛\e[0m\n");
-        exit(EXIT_FAILURE);
-    }
+		exit(EXIT_FAILURE);
+	}
 }
 
 int main(void)
@@ -60,9 +57,9 @@ int main(void)
     int original, tested;
 
 	printf("\n\n\e[36m╒══════════════════════════════════════════════╕\n");
-	printf("│ 🫧  - ⚞ TESTEUR FT_PRINTF BONUS - KEYN ⚟ - 🫧  │\n");
+	printf("│ 🫧 - ⚞ TESTEUR FT_PRINTF BONUS - KEYN ⚟ - 🫧 │\n");
 	printf("│                                              │\n");
-	printf("│               💉 - v1.0 - 💉                 │");
+	printf("│                💉 - v2.0 - 💉                │");
 	printf("\n╘══════════════════════════════════════════════╛\e[0m\n\n\n");
 
 	printf("\e[37m╭━━━━═══╕出 ❖ tests flag - sur %%d et %%i ❖ 力╒═══━━━━╮\e[0m\n\n");
@@ -822,8 +819,8 @@ int main(void)
 
 	printf("\e[37m╭━━━━═══╕出 ❖ tests de %%s ❖ 力╒═══━━━━╮\e[0m\n\n");
 
-	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[%-s]", "Coraline"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original); fflush(stdout);
-	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[%-s]", "Coraline"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested); fflush(stdout);
+	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[%-s]", "Julia"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original); fflush(stdout);
+	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[%-s]", "Julia"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested); fflush(stdout);
 	custom_assert(original == tested, "Erreur sur le test 1 du flag %s (`-`)", 148);
 	
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[%0s]", "Chauve-Souris"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original); fflush(stdout);
@@ -925,7 +922,7 @@ int main(void)
 	printf("\e[37m╰━━━━═══╕出 ❖ ————————————— ❖ 力╒═══━━━━╯\e[0m\n\n\n");
 
 	printf("\e[32m╒═══════════════════════════════════════════╕\n");
-	printf("│ ✅ - ⚞ Tests passés avec succès !! ⚟ - ✅ │");
+	printf("│ 🎋 - ⚞ Tests passés avec succès !! ⚟ - 🎋 │");
 	printf("\n╘═══════════════════════════════════════════╛\e[0m\n");
 
     return 0;

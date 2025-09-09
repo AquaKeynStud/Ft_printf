@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandatory_parser.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keyn <keyn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: arocca <arocca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:26:50 by arocca            #+#    #+#             */
-/*   Updated: 2025/02/02 11:02:31 by keyn             ###   ########.fr       */
+/*   Updated: 2025/09/09 21:53:01 by arocca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int	parse_args(char *s, va_list *args, size_t *total_len)
 		}
 	}
 	else
-		return (*total_len += write(1, "%", 1));
+	{
+		if (authorized_c(s[0]) > -1)
+			return (*total_len += write(1, "%", 1) - 1);
+		else
+			return (*total_len += write(1, "%", 1));
+	}
 	return (0);
 }

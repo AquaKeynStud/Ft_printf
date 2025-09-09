@@ -98,15 +98,3 @@ re :
 
 norminette :
 	norminette -R CheckForbiddenSourceHeader $(D_SRC) $(D_BON) $(D_INC)
-
-main : $(NAME)
-	@$(CC) -w -I$(D_INC) main.c $(NAME) -o mandatory_tester
-	@./mandatory_tester
-
-main2 : $(NAME)
-	@$(CC) -w -I$(D_INC) main_2.c $(NAME) -o mandatory_tester
-	@./mandatory_tester
-	
-bmain : $(NAME)
-	@$(CC) -w -I$(D_INC) main_bonus.c $(NAME) -o bonus_tester
-	@./bonus_tester

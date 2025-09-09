@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include "ft_printf.h"
 
 int	stl(const char *str)
 {
@@ -14,45 +13,43 @@ int	stl(const char *str)
 }
 
 void custom_assert(int expr, const char *msg, float n_test) {
-	float	total_test = 44;
+	float	total_test = 47;
 	int		size_pan = 2;
-    if (!expr) {
+	if (!expr) {
 		printf("\e[31m╒");
-		for (int i = 0; i < (stl(msg) + 21); i++)
-		{
-			size_pan += 1;
+		for (int i = 0; i < (stl(msg) + 20) + !(stl(msg) % 2); i++)
 			printf("═");
-		}
 		printf("╕\n");
 		printf("│");
-		for (int i = 0; i < (stl(msg) + 21); i++)
+		for (int i = 0; i < (stl(msg) + 20) + !(stl(msg) % 2); i++)
 			printf(" ");
 		printf("│\n");
-        fprintf(stderr, "│  Assertion error:\e[0m %s\e[31m", msg);
+		fprintf(stderr, "│  Assertion error:\e[0m %s\e[31m", msg);
 		for (int i = 0; i < 2; i++)
 			printf(" ");
 		printf("│\n");
 		printf("│");
-		for (int i = 0; i < (stl(msg) + 21); i++)
+		for (int i = 0; i < (stl(msg) + 20) + !(stl(msg) % 2); i++)
 			printf(" ");
 		printf("│\n");
 		printf("│");
-		for (int i = 0; i < (((stl(msg)) / 2) - 10 - ((stl(msg) + 21)%2 == 1)); i++)
+
+		for (int i = 0; i < ((((stl(msg)) + 20) / 2) - 21) + !(stl(msg) % 2); i++)
 			printf(" ");
-		printf("\e[36m🫧  - Vous avez passé %05.2f%% des tests - 🫧\e[31m", (n_test / total_test) * 100);
-		for (int i = 0; i < ((stl(msg) - 18) / 2); i++)
+		printf("\e[36m🫧 - Vous avez passé %05.2f%% des tests - 🫧\e[31m", (n_test / total_test) * 100);
+		for (int i = 0; i < ((((stl(msg)) + 20) / 2) - 21) + (stl(msg) % 2); i++)
 			printf(" ");
 		printf("│\n");
 		printf("│");
-		for (int i = 0; i < (stl(msg) + 21); i++)
+		for (int i = 0; i < (stl(msg) + 20) + !(stl(msg) % 2); i++)
 			printf(" ");
 		printf("│\n");
 		printf("╘");
-		for (int i = 0; i < (stl(msg) + 21); i++)
+		for (int i = 0; i < (stl(msg) + 20) + !(stl(msg) % 2); i++)
 			printf("═");
 		printf("╛\e[0m\n");
-        exit(EXIT_FAILURE);
-    }
+		exit(EXIT_FAILURE);
+	}
 }
 
 int	main(void)
@@ -60,7 +57,7 @@ int	main(void)
 	int original, tested;
 
 	printf("\n\n\e[36m╒════════════════════════════════════════╕\n");
-	printf("│ 🫧  - ⚞ TESTEUR FT_PRINTF - KEYN ⚟ - 🫧  │\n");
+	printf("│ 🫧 - ⚞ TESTEUR FT_PRINTF - KEYN ⚟ - 🫧 │\n");
 	printf("│                                        │\n");
 	printf("│             💉 - v2.0 - 💉             │");
 	printf("\n╘════════════════════════════════════════╛\e[0m\n\n\n");
@@ -69,7 +66,7 @@ int	main(void)
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[%%]"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[%%]"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test de taille du pourcentage n'est pas passé D:\n", 1);
+	custom_assert(original == tested, "Le test de taille du pourcentage n'est pas passé D:", 1);
 
 	printf("╰━━━━═══╕出 ❖ ——————————————————————— ❖ 力╒═══━━━━╯\n\n\n");
 
@@ -265,7 +262,7 @@ int	main(void)
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("[%d%%%c%s blblblbl%s  %d]", 100, '.', "Test passé", "test", 2); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("[%d%%%c%s blblblbl%s  %d]", 100, '.', "Test passé", "test", 2); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test sur une fausse conversion en milieu de texte n'est pas passé D:\n", 35);
+	custom_assert(original == tested, "Le test sur une fausse conversion en milieu de texte n'est pas passé D:", 35);
 
 	printf("╰━━━━═══╕出 ❖ ————————————— ❖ 力═══━━━━╯\n\n\n");
 
@@ -273,19 +270,19 @@ int	main(void)
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("%z"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("%z"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test sur une conversion impossible n'est pas passé D:\n", 36);
+	custom_assert(original == tested, "Le test sur une conversion impossible n'est pas passé D:", 36);
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("%"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("%"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test sans conversion n'est pas passé D:\n", 37);
+	custom_assert(original == tested, "Le test sans conversion n'est pas passé D:", 37);
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf(NULL); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf(NULL); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test sans format n'est pas passé D:\n", 38);
+	custom_assert(original == tested, "Le test sans format n'est pas passé D:", 38);
 
 	printf("\e[31m");
 	printf("╒═════════════════════════════════════════════════════════════════════════╕\n");
-	printf("│                          🪼 - ⚞ DISCLAIMER ⚟ - 🪼                         │\n");
+	printf("│                          🪼 - ⚞ DISCLAIMER ⚟ - 🪼                       │\n");
 	printf("╘═════╕                                                             ╒═════╛\n");
 	printf("      │         Les tests qui vont suivre sont plus poussés         │\n");
 	printf("      │          ils vous obligeraient surement à modifier          │\n");
@@ -293,7 +290,9 @@ int	main(void)
 	printf("      │                                                             │\n");
 	printf("      │    Entre nous, ces tests ne faisant pas partie du sujet,    │\n");
 	printf("      │                ils devraient être négligés.                 │\n");
-	printf("      │    (leur résultat avec printf peuvent être aléatoires...)   │\n");
+	printf("      │   (il suffit d'un flag bonus après %% pour casser le prgrm)  │\n");
+	printf("      │                                                             │\n");
+	printf("      │   ex: `%%%c` ou `%%%c` cassera le projet mandatory facilement   │\n", '.', '0');
 	printf("      │                                                             │\n");
 	printf("      │      Ils ont cependant étés réalisés pour quelques uns      │\n");
 	printf("      │           pendant mes évaluations, soyez prudents           │\n");
@@ -301,28 +300,36 @@ int	main(void)
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("%zqsf"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("%zqsf"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test sans format n'est pas passé D:\n", 39);
+	custom_assert(original == tested, "Le test sans format n'est pas passé D:", 39);
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("%zsqsf"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("%zsqsf"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test sans format n'est pas passé D:\n", 40);
+	custom_assert(original == tested, "Le test sans format n'est pas passé D:", 40);
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("%zsqsf %s", "Bonjour"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("%zsqsf %s", "Bonjour"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test sans format n'est pas passé D:\n", 41);
+	custom_assert(original == tested, "Le test sans format n'est pas passé D:", 41);
 
 	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("LeTestDeFou%zLeTestDeFou"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
 	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("LeTestDeFou%zLeTestDeFou"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test sans format n'est pas passé D:\n", 42);
+	custom_assert(original == tested, "Le test sans format n'est pas passé D:", 42);
 
-	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("C'est le dernier%qqqzC'est le dernier"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
-	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("C'est le dernier%qqqzC'est le dernier"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
-	custom_assert(original == tested, "Le test sans format n'est pas passé D:\n", 43);
+	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("C'est pas le dernier%qqqzC'est pas le dernier"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
+	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("C'est pas le dernier%qqqzC'est pas le dernier"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
+	custom_assert(original == tested, "Le test sans format n'est pas passé D:", 43);
+
+	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("%"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
+	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("%"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
+	custom_assert(original == tested, "Le test simple du pourcentage n'est pas passé D:", 44);
+
+	printf("⤐ Optionnel (bonus) ⬷\n");
+	printf("\e[34mOriginal : \e[0m"); fflush(stdout); original = printf("Bonjour comment % ça va ?"); fflush(stdout); printf("\e[34m	| {%i}\e[0m\n", original);
+	printf("\e[36mTested :   \e[0m"); fflush(stdout); tested = ft_printf("Bonjour comment % ça va ?"); fflush(stdout); printf("\e[36m	| {%i}\e[0m\n\n", tested);
 
 	printf("╰━━━━═══╕出 ❖ ————————————— ❖ 力╒═══━━━━╯\n\n\n");
 
 	printf("\e[32m╒═══════════════════════════════════════════╕\n");
-	printf("│ ✅ - ⚞ Tests passés avec succès !! ⚟ - ✅ │");
+	printf("│ 🎋 - ⚞ Tests passés avec succès !! ⚟ - 🎋 │");
 	printf("\n╘═══════════════════════════════════════════╛\e[0m\n");
 
 	return (0);
